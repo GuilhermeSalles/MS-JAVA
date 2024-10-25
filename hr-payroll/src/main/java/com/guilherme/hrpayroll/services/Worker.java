@@ -1,11 +1,8 @@
 package com.guilherme.hrpayroll.services;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Worker implements Serializable {
-	
-	
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
@@ -16,6 +13,7 @@ public class Worker implements Serializable {
 	}
 
 	public Worker(Long id, String name, Double dailyIncome) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.dailyIncome = dailyIncome;
@@ -25,17 +23,32 @@ public class Worker implements Serializable {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Double getDailyIncome() {
 		return dailyIncome;
 	}
 
+	public void setDailyIncome(Double dailyIncome) {
+		this.dailyIncome = dailyIncome;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
@@ -47,8 +60,11 @@ public class Worker implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Worker other = (Worker) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
-	
-	
 }
